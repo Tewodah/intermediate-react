@@ -10,7 +10,6 @@ export default function ParentComponent() {
     useEffect(() => {
         // setVistors(vistors + 1)
         return ()=>{
-            console.log("clean up");
         }
     }, []);
      

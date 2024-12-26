@@ -1,14 +1,11 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import ParentComponent from "./components/parent";
 import Contact from "./components/contact";
 import News from "./components/news";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import Layout from "./components/layout";
-import { Link } from "react-router-dom";
 import Counter from "./components/counter";
+import TodoList from "./components/todoList";
 
 
 const routes = createBrowserRouter([
@@ -34,6 +31,10 @@ const routes = createBrowserRouter([
         path: "counter",
         element: <Counter />,
       },
+      {
+        path:"todo",
+        element:<TodoList/>
+      }
     ],
   },
 ]);

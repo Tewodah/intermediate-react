@@ -15,7 +15,6 @@ export default function Contact() {
     
     function handleSubmit (e) {   
         e.preventDefault();
-        console.log(email, feedback);
         setFeedbacks([...feedbacks, {email, feedback}]);
     }   
     

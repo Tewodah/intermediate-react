@@ -28,6 +28,12 @@ export default function Layout(){
           >
             Counter
           </Link>
+          <Link
+            to="/todo"
+            className="text-white  hover:underline hover:font-semibold"
+          >
+            Todo Lists
+          </Link>
         </nav>
         <Outlet />
       </>
