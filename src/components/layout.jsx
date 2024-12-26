@@ -22,8 +22,14 @@ export default function Layout(){
           >
             Contact
           </Link>
+          <Link
+            to="/counter"
+            className="text-white  hover:underline hover:font-semibold"
+          >
+            Counter
+          </Link>
         </nav>
-        <Outlet/>
+        <Outlet />
       </>
     );
 }
