@@ -5,6 +5,7 @@ import News from "./components/news";
 import { createBrowserRouter, RouterProvider, } from "react-router-dom";
 import Layout from "./components/layout";
 import Counter from "./components/counter";
+import Register from "./components/register";
 import TodoList from "./components/todoList";
 
 
@@ -27,9 +28,13 @@ const routes = createBrowserRouter([
         path: "contact",
         element: <Contact />,
       },
+        {
+          path:"Register",
+          element: <Register/>
+        },
       {
         path: "counter",
-        element: <Counter />,
+        element: <Counter />
       },
       {
         path:"todo",
