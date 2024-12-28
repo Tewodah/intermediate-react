@@ -1,29 +1,58 @@
-
-import  { useState } from "react"; 
+import { useState, useEffect } from "react"; 
+import { useDispatch } from "react-redux";
 import UsersList from "./userslist";
 
-
 export default function Register() {
-
+    const dispatch = useDispatch();
     const [firstName, setFirstName] = useState("");
     const [middleName, setMiddleName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
     
     const [userslist, setUsersList] = useState([]);
-    
-    function handleSubmit (e) {   
+    const [errorMessage, setErrorMessage] = useState("");
+
+    // Load users from localStorage when the component mounts
+    useEffect(() => {
+        const storedUsers = localStorage.getItem('users');
+        if (storedUsers) {
+            setUsersList(JSON.parse(storedUsers));
+        }
+    }, []);
+
+    function handleSubmit(e) {   
         e.preventDefault();
-        console.log(firstName, middleName , lastName, email, password);
-        setUsersList([...userslist, {firstName,  middleName,  lastName, email, password}]);
-    }   
-    
+        
+        // Validation check
+        if (!firstName || !lastName || !email || !password) {
+            setErrorMessage("Please fill in all required fields.");
+            return;
+        }
+
+        // Create user object
+        const newUser   = { firstName, middleName, lastName, email, password };
+
+        // Add user to the list and save to localStorage
+        const updatedUsersList = [...userslist, newUser  ];
+        setUsersList(updatedUsersList);
+        localStorage.setItem('users', JSON.stringify(updatedUsersList));
+
+        // Dispatch action to increment the counter
+        dispatch({ type: "INCREMENT", payload: { test: "New user registered" } });
+
+        // Clear the form fields
+        setFirstName("");
+        setMiddleName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+        setErrorMessage(""); // Clear error message on successful submission
+    }
     return (
       <>
         <form onSubmit={handleSubmit} className="space-y-6 w-2/3 mx-auto p-4 border border-1 m-6 border-yellow-500 rounded-lg">
-        <h1 className="text-4xl text-white">Registration</h1>
+        <h1 className="text-4xl text-white">Registeration Form</h1>
           <div className="grid gap-6 mb-6 md:grid-cols-2"> </div>
           <div className="mb-6">
             <label
@@ -109,7 +138,7 @@ export default function Register() {
               id="email"
               required minlength="7"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="fill your password here"
+              placeholder="set a password "
               onChange = {(e) => { setPassword(e.target.value)}}
               
             />
